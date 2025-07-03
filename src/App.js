@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Container, Row, Col, Button, Table, Form, InputGroup } from 'react-bootstrap';
-import UserTable from './UserTable';
-import ProductTable from './ProductTable';
-import S3Uploader from './S3Uploader';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import ProductTable from "./ProductTable";
+import S3Uploader from "./S3Uploader";
+import UserTable from "./UserTable";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -14,12 +14,16 @@ function App() {
     // Fetch users and products from backend
     async function fetchData() {
       try {
-        const userResponse = await axios.get('http://44.201.171.2:3000/usuarios');
-        const productResponse = await axios.get('http://44.201.171.2:3000/produtos');
+        const userResponse = await axios.get(
+          "http://3.85.198.55:3000/usuarios"
+        );
+        const productResponse = await axios.get(
+          "http://3.85.198.55:3000/produtos"
+        );
         setUsers(userResponse.data);
         setProducts(productResponse.data);
       } catch (error) {
-        console.error('Erro ao buscar dados:', error);
+        console.error("Erro ao buscar dados:", error);
       } finally {
         setLoading(false);
       }

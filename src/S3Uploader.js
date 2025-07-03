@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Form, Button, ListGroup } from 'react-bootstrap';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Button, Form, ListGroup } from "react-bootstrap";
 
 const S3Uploader = () => {
   const [buckets, setBuckets] = useState([]);
-  const [selectedBucket, setSelectedBucket] = useState('');
+  const [selectedBucket, setSelectedBucket] = useState("");
   const [file, setFile] = useState(null);
   const [objects, setObjects] = useState([]);
 
   useEffect(() => {
     async function fetchBuckets() {
       try {
-        const response = await axios.get('http://44.201.171.2:3000/buckets');
+        const response = await axios.get("http://3.85.198.55:3000/buckets");
         setBuckets(response.data);
       } catch (error) {
-        console.error('Erro ao carregar buckets:', error);
+        console.error("Erro ao carregar buckets:", error);
       }
     }
     fetchBuckets();
@@ -28,26 +28,32 @@ const S3Uploader = () => {
     if (!file || !selectedBucket) return;
 
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
 
     try {
-      await axios.post(`http://44.201.171.2:3000/buckets/${selectedBucket}/upload`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
-      alert('Arquivo enviado com sucesso!');
+      await axios.post(
+        `http://3.85.198.55:3000/buckets/${selectedBucket}/upload`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+      alert("Arquivo enviado com sucesso!");
     } catch (error) {
-      console.error('Erro no upload:', error);
-      alert('Erro ao enviar o arquivo');
+      console.error("Erro no upload:", error);
+      alert("Erro ao enviar o arquivo");
     }
   };
 
   const handleBucketChange = async (bucketName) => {
     setSelectedBucket(bucketName);
     try {
-      const response = await axios.get(`http://44.201.171.2:3000/buckets/${bucketName}`);
+      const response = await axios.get(
+        `http://3.85.198.55:3000/buckets/${bucketName}`
+      );
       setObjects(response.data);
     } catch (error) {
-      console.error('Erro ao carregar objetos:', error);
+      console.error("Erro ao carregar objetos:", error);
     }
   };
 
@@ -55,7 +61,10 @@ const S3Uploader = () => {
     <div>
       <Form.Group controlId="bucketSelect">
         <Form.Label>Escolha um bucket:</Form.Label>
-        <Form.Control as="select" onChange={(e) => handleBucketChange(e.target.value)}>
+        <Form.Control
+          as="select"
+          onChange={(e) => handleBucketChange(e.target.value)}
+        >
           <option>Selecione um bucket</option>
           {buckets.map((bucket) => (
             <option key={bucket.Name} value={bucket.Name}>
