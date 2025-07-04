@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import ProductTable from "./ProductTable";
 import S3Uploader from "./S3Uploader";
@@ -15,10 +15,10 @@ function App() {
     async function fetchData() {
       try {
         const userResponse = await axios.get(
-          "http://13.218.91.16:3000/usuarios"
+          "http://13.222.172.155:3000/usuarios"
         );
         const productResponse = await axios.get(
-          "http://13.218.91.16:3000/produtos"
+          "http://13.222.172.155:3000/produtos"
         );
         setUsers(userResponse.data);
         setProducts(productResponse.data);

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form, ListGroup } from "react-bootstrap";
 
 const S3Uploader = () => {
@@ -11,7 +11,7 @@ const S3Uploader = () => {
   useEffect(() => {
     async function fetchBuckets() {
       try {
-        const response = await axios.get("http://13.218.91.16:3000/buckets");
+        const response = await axios.get("http://13.222.172.155:3000/buckets");
         setBuckets(response.data);
       } catch (error) {
         console.error("Erro ao carregar buckets:", error);
@@ -32,7 +32,7 @@ const S3Uploader = () => {
 
     try {
       await axios.post(
-        `http://3.85.198.55:3000/buckets/${selectedBucket}/upload`,
+        `http://13.222.172.155:3000/buckets/${selectedBucket}/upload`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -49,7 +49,7 @@ const S3Uploader = () => {
     setSelectedBucket(bucketName);
     try {
       const response = await axios.get(
-        `http://13.218.91.16:3000/buckets/${bucketName}`
+        `http://13.222.172.155:3000/buckets/${bucketName}`
       );
       setObjects(response.data);
     } catch (error) {
