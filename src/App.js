@@ -15,10 +15,10 @@ function App() {
     async function fetchData() {
       try {
         const userResponse = await axios.get(
-          "http://3.85.198.55:3000/usuarios"
+          "http://13.218.91.16:3000/usuarios"
         );
         const productResponse = await axios.get(
-          "http://3.85.198.55:3000/produtos"
+          "http://13.218.91.16:3000/produtos"
         );
         setUsers(userResponse.data);
         setProducts(productResponse.data);
