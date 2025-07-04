@@ -28,7 +28,6 @@ function App() {
         setLoading(false);
       }
     }
-
     fetchData();
   }, []);
 
